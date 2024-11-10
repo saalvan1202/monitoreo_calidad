@@ -1,0 +1,119 @@
+/* Contenedor principal */
+.login-container {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+/* Caja de login */
+.login-box {
+  width: 40%;
+  padding: 20px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado con logo */
+.login-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo-peru {
+  height: 60px;
+}
+
+.institute-info h2 {
+  font-size: 1.2em;
+  color: #333333;
+}
+
+.institute-info p {
+  font-size: 0.9em;
+  color: #555555;
+}
+
+/* Formulario */
+.login-form {
+  width: 80%;
+}
+
+h3 {
+  margin-top: 0;
+  color: #333333;
+}
+
+p {
+  color: #666666;
+}
+
+.input-group {
+  position: relative;
+  margin: 15px 0;
+}
+
+.input-group i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* Enlace de recuperación de contraseña */
+.recover-password {
+  display: block;
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: #888888;
+  text-align: right;
+}
+
+/* Botón de ingreso */
+.login-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  color: #ffffff;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #c0392b;
+}
+
+/* Pie de página */
+.footer {
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: #aaaaaa;
+  text-align: center;
+}
+
+/* Imagen de la institución */
+.login-image {
+  width: 60%;
+}
+
+.login-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
