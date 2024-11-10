@@ -1,17 +1,33 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import Login from "./modules/security/Login";
+import { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import PrivateRoutes from './utils/privateRoutes';
+import { privateRoutes as monitoringPrivate, publicRoutes as monitoringPublic } from './routes/monitoring.routes'
+import SpinLoader from './components/spin-loader';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <Login />
-    </>
+    <div className="h-screen bg-slate-100">
+      <Suspense fallback={<SpinLoader withBody={true} />}>
+        <Routes>
+          {monitoringPublic.map((route, index) => (
+            <Route key={index} path={route.path} element={<route.element />} />
+          ))}
+
+          <Route element={<PrivateRoutes />}>
+            {monitoringPrivate.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                element={<route.element />}
+              />
+            ))}
+          </Route>
+        </Routes>
+      </Suspense>
+    </div>
   );
 }
 
 export default App;
+
+

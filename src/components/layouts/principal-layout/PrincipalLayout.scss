@@ -1,0 +1,10 @@
+.principal-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  &__side-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
