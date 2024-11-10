@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { Menu } from 'antd';
-import ButtonAcc from '../cite-ui/ButtonAcc.jsx';
+import { ConfigProvider, Menu } from 'antd';
 import { getLevelKeys, onOpenKeys } from './utils.js';
 import { menuItems } from '../../@fake-db/menuItems.jsx'
 
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-const SideMenu = ({ collapsed }) => {
+const SideMenu = () => {
 
   const MENU_ITEMS = menuItems;
 
@@ -22,27 +19,26 @@ const SideMenu = ({ collapsed }) => {
   };
 
   return (
-    <div>
-      <Menu
-        defaultSelectedKeys={['231']}
-        openKeys={stateOpenKeys}
-        onOpenChange={onOpenChange}
-        mode="inline"
-        items={MENU_ITEMS}
-      />
-      <div>
-        <ButtonAcc
-          className={`w-full h-10 ${!collapsed && 'flex justify-start px-7'}`}
-          type="primary"
-          danger={true}
-        >
-          <FontAwesomeIcon
-            className="transform scale-x-[-1]"
-            icon={faArrowRightFromBracket}
-          />
-          {!collapsed && 'Cerrar Sesión'}
-        </ButtonAcc>
-      </div>
+    <div className='bg-fondo-footer'>
+      <ConfigProvider theme={{
+        components: {
+          Menu: {
+            colorBgContainer: '#3C3F41',
+            colorText: '#B6AFAF',
+            colorItemTextSelected: 'white',
+            colorItemTextHover: 'white',
+            controlItemBgActive: '#525252'
+          },
+        },
+      }}>
+        <Menu
+          defaultSelectedKeys={['231']}
+          openKeys={stateOpenKeys}
+          onOpenChange={onOpenChange}
+          mode="inline"
+          items={MENU_ITEMS}
+        />
+      </ConfigProvider>
     </div>
   );
 };
