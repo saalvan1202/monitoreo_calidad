@@ -1,6 +1,6 @@
 const Zones = () => {
     return (
-        <div>Zone</div>
+        <div>Zones</div>
     )
 }
 
