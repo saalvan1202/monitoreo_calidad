@@ -18,7 +18,7 @@ const ButtonAcc = ({
   title = '',
   borderRadius = 'none',
   propsComponentes = defaultStyle,
-  onClick = () => {},
+  onClick = () => { },
 }) => {
   return (
     <TotalProvider

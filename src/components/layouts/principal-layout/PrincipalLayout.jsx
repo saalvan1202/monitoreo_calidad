@@ -75,7 +75,6 @@ const PrincipalLayout = ({ children }) => {
                 background: '#3C3F41',
                 borderRadius: 0,
               }}
-              className="border border-slate-200"
             >
               {children}
             </div>
@@ -84,6 +83,7 @@ const PrincipalLayout = ({ children }) => {
             style={{
               textAlign: 'center',
               padding: 0,
+              marginTop: 15,
               height: 60,
               backgroundColor: '#3C3F41',
               display: 'flex',
