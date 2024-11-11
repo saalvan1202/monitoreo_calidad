@@ -1,10 +1,11 @@
-.principal-layout {
-  display: grid;
-  grid-template-columns: auto 1fr;
+.ant-layout-sider-trigger {
+  background-color: #3c3f41 !important;
 
-  &__side-menu {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  span {
+    color: white !important;
   }
+}
+
+.ant-layout-sider {
+  border: none !important;
 }

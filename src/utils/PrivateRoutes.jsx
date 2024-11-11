@@ -2,7 +2,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import PrincipalLayout from "../components/layouts/principal-layout";
 
 const PrivateRoutes = () => {
-  const user = false;
+  const user = true;
 
   return user ? (
     <PrincipalLayout>
