@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 
-const BasicModal = ({ title = "", open = true, setOpen = () => { }, children, handleExecution }) => {
+const BasicModal = ({ title = "", open = true, setOpen = () => { }, children, handleExecution = () => { } }) => {
 
     const handleOk = () => {
         handleExecution();
