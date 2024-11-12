@@ -1,14 +1,14 @@
-import { useState } from 'react';
 import { Modal } from 'antd';
 
 const FormModal = ({ title = "", open = true, setOpen = () => { }, children, formRef }) => {
 
   const handleOk = () => {
-    if (formRef.current) formRef.current.requestSubmit();
+    if (formRef.current) formRef.current.submit();
   };
 
   const handleCancel = () => {
     console.log('Clicked cancel button');
+    if (formRef.current) formRef.current.resetFields();
     setOpen(false);
   };
 

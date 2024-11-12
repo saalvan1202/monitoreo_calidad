@@ -3,11 +3,11 @@ import { Input } from 'antd';
 import InfoCards from '../../components/info-cards/InfoCards.jsx';
 import FormModal from '../../../../components/modals/FormModal.jsx';
 import ButtonCite from '../../../../components/cite-ui/ButtonCite.jsx'
-import FormZone from './forms/FormZone.jsx';
+import FormArea from './forms/FormArea.jsx';
 import { GRAY_BUTTON } from '../../../../colors/buttons.js'
 import { zonas } from '../../../../@fake-db/zonas.js';
 import { removeSuffix } from '../../../../utils/sufix.js';
-import './Zones.scss'
+import './Areas.scss'
 
 const { Search } = Input;
 
@@ -38,7 +38,7 @@ const Zones = () => {
             </section>
             <section className='cartas bg-fondo-secciones '>
                 <section className='flex justify-start p-3 border-b border-fondo-footer'>
-                    <p className='font-inter text-lg text-texto-gray'>Zonas</p>
+                    <p className='font-inter text-lg text-texto-gray'>Areas</p>
                 </section>
                 <section>
                     <div className='flex justify-center items-center p-14 px-24'>
@@ -63,7 +63,7 @@ const Zones = () => {
             </section>
 
             <FormModal title="Registrar zona" open={openRegister} setOpen={setOpenRegister} formRef={formRef}>
-                <FormZone formRef={formRef} handleSubmit={handleSubmitRegister} />
+                <FormArea formRef={formRef} handleSubmit={handleSubmitRegister} />
             </FormModal>
         </div >
     )
