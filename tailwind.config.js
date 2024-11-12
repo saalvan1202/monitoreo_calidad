@@ -23,6 +23,7 @@ export default {
           footer: '#3C3F41',
           cajas: '#525252',
           opciones: '#868889',
+          secciones: '#D1D1D1',
         },
       },
     },

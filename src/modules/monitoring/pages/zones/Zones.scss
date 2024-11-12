@@ -1,4 +1,9 @@
 .zones {
   display: grid;
   grid-template-rows: auto 1fr auto;
+
+  .cartas {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
 }
