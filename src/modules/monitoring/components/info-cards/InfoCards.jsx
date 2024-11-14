@@ -1,17 +1,25 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import ButtonCite from "../../../../components/cite-ui/ButtonCite.jsx"
 import BasicModal from "../../../../components/modals/BasicModal.jsx"
 import FormModal from "../../../../components/modals/FormModal.jsx"
-import FormZone from "../../pages/zones/forms/FormZone.jsx"
 import { GRAY_BUTTON, RED_BUTTON } from "../../../../colors/buttons.js"
 import './InfoCards.scss'
-import { removeSuffix } from "../../../../utils/sufix.js"
 
-const InfoCards = ({ id = null, nombre = "", descripcion = "", type_card = "" }) => {
-    const formRef = useRef(null)
+const InfoCards = ({ id = null, nombre = "", descripcion = "", type_card = "", color_card = {}, handleClickCard = () => { }, formRef, children }) => {
 
     const [openDelete, setOpenDelete] = useState(false)
+
     const [openEdit, setOpenEdit] = useState(false)
+
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
 
     const showModalDelete = () => {
         setOpenDelete(true);
@@ -22,21 +30,16 @@ const InfoCards = ({ id = null, nombre = "", descripcion = "", type_card = "" })
     };
 
     const handleExecutionDelete = () => {
-        console.log(`Eliminando la zona con id: ${id}`)
-    }
-
-    const handleSubmitEdit = (values) => {
-        const _values = removeSuffix(values, '_zona')
-        const newValues = { id, ..._values }
-        console.log('success', newValues)
+        console.log(`Eliminando la ${type_card} con id: ${id}`)
     }
 
     return (
-        <div className="info-card h-64 bg-[#13C703] rounded-lg">
+        <div style={{ backgroundColor: color_card.backgroundColor, ...(isHovered && { backgroundColor: color_card.hoverColor }) }} className="info-card h-64 rounded-lg">
             <div className="info-card__description bg-white rounded-[6px] flex flex-col justify-between">
                 <div className="info-card__description-data px-4">
                     <div className="flex h-6 relative justify-center items-center">
-                        <div className="rombo absolute bottom-3 border-2 border-texto-optimo"></div>
+                        <button style={{ backgroundColor: color_card.backgroundColor, borderColor: color_card.borderColor, ...(isHovered && { backgroundColor: color_card.hoverColor }) }} className="rombo absolute bottom-3 border-2" onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave} onClick={() => handleClickCard(id)}></button>
                     </div>
                     <div>
                         <p className="py-3 text-xl font-inter">Nombre: {nombre}</p>
@@ -73,7 +76,7 @@ const InfoCards = ({ id = null, nombre = "", descripcion = "", type_card = "" })
             </BasicModal>
 
             <FormModal title={`Editar registro de ${type_card}`} open={openEdit} setOpen={setOpenEdit} formRef={formRef}>
-                <FormZone formRef={formRef} handleSubmit={handleSubmitEdit} nombre={nombre} descripcion={descripcion} />
+                {children}
             </FormModal>
         </div>
     )

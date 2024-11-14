@@ -1,29 +1,26 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Input } from 'antd';
 import InfoCards from '../../components/info-cards/InfoCards.jsx';
 import FormModal from '../../../../components/modals/FormModal.jsx';
 import ButtonCite from '../../../../components/cite-ui/ButtonCite.jsx'
 import SelectCite from '../../../../components/cite-ui/SelectCite.jsx';
-import FormArea from './forms/FormArea.jsx';
+import FormWaterTanks from './forms/FormWaterTanks.jsx';
 import { useMonitoring } from '../../../../store/useMonitoring.js';
 import { GRAY_BUTTON } from '../../../../colors/buttons.js'
-import { AQUA_CARD } from '../../../../colors/cards.js';
+import { YELLOW_CARD } from '../../../../colors/cards.js';
+import { tanques } from '../../../../@fake-db/tanques.js';
 import { areas } from '../../../../@fake-db/areas.js';
 import { zonas } from '../../../../@fake-db/zonas.js';
 import { removeSuffix } from '../../../../utils/sufix.js';
 import { optionsTransform } from '../../../../utils/optionsTransform.js';
-import './Areas.scss'
+import './WaterTanks.scss'
 
 const { Search } = Input;
 
-const Areas = () => {
-    const { idZone, setIdZone, setIdArea } = useMonitoring()
-
-    const navigate = useNavigate()
+const WaterTanks = () => {
+    const { idZone, setIdZone, idArea, setIdArea } = useMonitoring()
 
     const formRefRegister = useRef(null)
-
     const formReftEdit = useRef(null)
 
     const [openRegister, setOpenRegister] = useState(false)
@@ -33,28 +30,26 @@ const Areas = () => {
     };
 
     const handleSubmitRegister = (values) => {
-        const _values = removeSuffix(values, '_area')
+        const _values = removeSuffix(values, '_tanque')
         console.log('success', _values)
     }
 
     const handleSubmitEdit = (values, id) => {
-        const _values = removeSuffix(values, '_area')
+        const _values = removeSuffix(values, '_tanque')
         const newValues = { id, ..._values }
         console.log('success', newValues)
     }
 
-    const handleClickCard = (id) => {
-        setIdArea(id)
-        navigate('/water-tanks')
-    }
-
     const optionsZones = optionsTransform(zonas);
 
+    const optionsAreas = optionsTransform(areas);
+
     return (
-        <div className="areas p-3 gap-3 overflow-x-scroll">
+        <div className="water-tanks p-3 gap-3 overflow-x-scroll">
             <section className='filtros bg-fondo-secciones flex justify-between items-center p-4'>
-                <div className='filtros__select justify-start w-[20%] min-w-[200px]'>
-                    <SelectCite options={optionsZones} defaultValue={idZone} setData={setIdZone} />
+                <div className='filtros__select justify-start w-[80%]'>
+                    <SelectCite className='min-w-[150px]' options={optionsZones} defaultValue={idZone} setData={setIdZone} />
+                    <SelectCite className='min-w-[150px]' options={optionsAreas} defaultValue={idArea} setData={setIdArea} />
                 </div>
                 <div className='filtros__search w-[20%] min-w-[200px]'>
                     <Search
@@ -66,16 +61,16 @@ const Areas = () => {
             </section>
             <section className='cartas bg-fondo-secciones '>
                 <section className='flex justify-start p-4 border-b border-fondo-footer'>
-                    <p className='font-inter text-lg text-texto-gray'>Areas</p>
+                    <p className='font-inter text-lg text-texto-gray'>Tanques</p>
                 </section>
                 <section>
                     <div className='cartas__caja-cartas flex justify-center items-center p-14 px-24'>
                         <div className='cartas__caja-cartas__info-cards w-full gap-20'>
-                            {areas
-                                .filter((area) => area.id_zone === idZone)
-                                .map((area) => (
-                                    <InfoCards key={area.id} id={area.id} nombre={area.nombre} descripcion={area.descripcion} type_card={'area'} color_card={AQUA_CARD} handleClickCard={handleClickCard} formRef={formReftEdit}>
-                                        <FormArea formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, area.id)} id_zone={idZone} nombre={area.nombre} descripcion={area.descripcion} />
+                            {tanques
+                                .filter((tanque) => tanque.id_area === idArea)
+                                .map((tanque) => (
+                                    <InfoCards key={tanque.id} id={tanque.id} nombre={tanque.nombre} descripcion={tanque.descripcion} type_card={'tanque'} color_card={YELLOW_CARD} formRef={formReftEdit}>
+                                        <FormWaterTanks formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, tanque.id)} id_area={idArea} nombre={tanque.nombre} descripcion={tanque.descripcion} />
                                     </InfoCards>
                                 ))}
                         </div>
@@ -90,15 +85,15 @@ const Areas = () => {
                     propsComponentes={GRAY_BUTTON}
                     onClick={showModalRegister}
                 >
-                    <p className='font-inter font-light text-xs'>REGISTRAR AREA</p>
+                    <p className='font-inter font-light text-xs'>REGISTRAR TANQUE</p>
                 </ButtonCite>
             </section>
 
             <FormModal title="Registrar area" open={openRegister} setOpen={setOpenRegister} formRef={formRefRegister}>
-                <FormArea formRef={formRefRegister} handleSubmit={handleSubmitRegister} id_zone={idZone} />
+                <FormWaterTanks formRef={formRefRegister} handleSubmit={handleSubmitRegister} id_area={idArea} />
             </FormModal>
         </div >
     )
 }
 
-export default Areas
+export default WaterTanks

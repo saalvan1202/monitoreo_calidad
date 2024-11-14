@@ -1,8 +1,13 @@
-.areas {
+.water-tanks {
   display: grid;
   grid-template-rows: auto 1fr auto;
 
   .filtros {
+    &__select {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
     @media (max-width: 690px) {
       display: flex;
       flex-direction: column;
@@ -11,6 +16,9 @@
       gap: 10px;
 
       &__select {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         width: 100%;
         min-width: 0;
       }

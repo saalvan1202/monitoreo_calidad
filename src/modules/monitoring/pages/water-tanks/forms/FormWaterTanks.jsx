@@ -6,7 +6,7 @@ const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
-const FormArea = ({ formRef, handleSubmit = () => { }, id_zone = 0, nombre = "", descripcion = "" }) => {
+const FormWaterTanks = ({ formRef, handleSubmit = () => { }, id_area = 0, nombre = "", descripcion = "" }) => {
 
     const optionsZones = optionsTransform(zonas);
 
@@ -16,17 +16,17 @@ const FormArea = ({ formRef, handleSubmit = () => { }, id_zone = 0, nombre = "",
             name="basic"
             layout='vertical'
             initialValues={{
-                id_zone_area: id_zone,
-                nombre_area: nombre,
-                descripcion_area: descripcion,
+                id_area_tanque: id_area,
+                nombre_tanque: nombre,
+                descripcion_tanque: descripcion,
             }}
             onFinish={handleSubmit}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
         >
             <Form.Item
-                label="Zona"
-                name="id_zone_area"
+                label="Area"
+                name="id_area_tanque"
                 rules={[
                     {
                         required: true,
@@ -34,12 +34,12 @@ const FormArea = ({ formRef, handleSubmit = () => { }, id_zone = 0, nombre = "",
                     },
                 ]}
             >
-                <Select defaultValue={id_zone} options={optionsZones} />
+                <Select defaultValue={id_area} options={optionsZones} />
             </Form.Item>
 
             <Form.Item
                 label="Nombre"
-                name="nombre_area"
+                name="nombre_tanque"
                 rules={[
                     {
                         required: true,
@@ -52,7 +52,7 @@ const FormArea = ({ formRef, handleSubmit = () => { }, id_zone = 0, nombre = "",
 
             <Form.Item
                 label="Descripcion"
-                name="descripcion_area"
+                name="descripcion_tanque"
                 rules={[
                     {
                         required: true,
@@ -65,4 +65,4 @@ const FormArea = ({ formRef, handleSubmit = () => { }, id_zone = 0, nombre = "",
         </Form>
     )
 };
-export default FormArea;
+export default FormWaterTanks;

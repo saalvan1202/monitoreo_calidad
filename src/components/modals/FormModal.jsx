@@ -18,6 +18,8 @@ const FormModal = ({ title = "", open = true, setOpen = () => { }, children, for
       open={open}
       onOk={handleOk}
       onCancel={handleCancel}
+      okText="Aceptar"
+      cancelText="Cancelar"
       centered
     >
       {children}
