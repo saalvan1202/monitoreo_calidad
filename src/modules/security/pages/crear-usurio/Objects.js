@@ -1,0 +1,16 @@
+export const USEROBJ = {
+  address: "",
+  apellidoMaterno: "",
+  dni: "",
+  edad: null,
+  email: "",
+  estadoCivil: "",
+  fechaNacimiento: "",
+  fotografia: "",
+  lastname: "",
+  name: "",
+  phone: "",
+  roles: [],
+  user_id: "",
+  username: "",
+};

@@ -1,6 +1,6 @@
-import { Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import PrivateRoutes from "./utils/privateRoutes";
+import { Suspense, useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import PrivateRoutes from "./utils/PrivateRoutes";
 import {
   privateRoutes as monitoringPrivate,
   publicRoutes as monitoringPublic,

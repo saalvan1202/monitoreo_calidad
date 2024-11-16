@@ -1,0 +1,266 @@
+.user {
+  min-height: 80vh;
+  height: 100%;
+  &-header {
+    padding: 10px 0 2px 15px;
+    align-items: center;
+    display: flex;
+    justify-content: start;
+    color: white;
+    font-size: 14px;
+  }
+}
+.form {
+  margin: 0px 15px 0px 15px;
+  height: 73vh;
+  display: grid;
+  grid-template-rows: 1fr 0.5fr;
+  gap: 10px;
+  &-user {
+    display: grid;
+    grid-template-columns: 0.7fr 2fr;
+    background-color: white;
+    &_img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &-imagen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 45vh;
+        width: 41.5vh;
+        padding-top: 30px;
+        padding-bottom: 10px;
+        gap: 20px;
+        background-color: rgb(60, 63, 65);
+        img {
+          height: 32vh;
+        }
+      }
+    }
+    &_data {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      .row {
+        margin: 10px 10px 20px 10px;
+        display: grid;
+        align-items: center;
+        grid-template-rows: repeat(3, 1fr);
+      }
+    }
+  }
+  &-access {
+    display: grid;
+    grid-template-rows: 1.5fr 1fr;
+    background-color: white;
+    .vertical {
+      display: grid;
+      margin: 10px 10px 20px 10px;
+      align-items: center;
+      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &_button {
+      display: flex;
+      margin-right: 10px;
+      justify-content: end;
+    }
+  }
+  input {
+    border: 2px solid #d9d9d9;
+    height: 2.3rem;
+  }
+}
+.button-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  button {
+    width: 146px;
+    height: 45px;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 5px;
+  }
+}
+:where(.css-dev-only-do-not-override-apn68).ant-btn-variant-solid:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
+  background-color: #ff0000;
+  font-size: 15px;
+}
+.user_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+:where(
+    .css-dev-only-do-not-override-apn68
+  ).ant-upload-wrapper.ant-upload-picture-card-wrapper
+  .ant-upload.ant-upload-select,
+:where(
+    .css-dev-only-do-not-override-apn68
+  ).ant-upload-wrapper.ant-upload-picture-circle-wrapper
+  .ant-upload.ant-upload-select {
+  height: 5vh;
+  min-width: 16.1vw;
+  width: 100%;
+}
+:where(
+    .css-dev-only-do-not-override-apn68
+  ).ant-upload-wrapper.ant-upload-picture-card-wrapper
+  .ant-upload.ant-upload-select,
+:where(
+    .css-dev-only-do-not-override-apn68
+  ).ant-upload-wrapper.ant-upload-picture-circle-wrapper
+  .ant-upload.ant-upload-select {
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 0;
+}
+@media (max-width: 1110px) {
+  .form {
+    overflow: auto;
+    margin: 0px 15px 0px 15px;
+    height: 73vh;
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+    gap: 10px;
+    &-user {
+      display: grid;
+      grid-template-columns: none;
+      grid-template-rows: 0.7fr 2fr;
+      background-color: white;
+      height: 85vh;
+      &_img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-imagen {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-top: 5px;
+          height: 40vh;
+          width: 35.5vh;
+          padding-top: 30px;
+          padding-bottom: 10px;
+          gap: 20px;
+          background-color: rgb(60, 63, 65);
+          img {
+            height: 25vh;
+          }
+        }
+      }
+      &_data {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        .row {
+          margin: 10px 10px 20px 10px;
+          display: grid;
+          align-items: center;
+          height: 40vh;
+          grid-template-rows: repeat(3, 1fr);
+        }
+      }
+    }
+    &-access {
+      display: grid;
+      grid-template-rows: 1.5fr 1fr;
+      background-color: white;
+      .vertical {
+        display: grid;
+        margin: 10px 10px 20px 10px;
+        align-items: center;
+        gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      &_button {
+        display: flex;
+        margin-right: 10px;
+        justify-content: end;
+      }
+    }
+    input {
+      border: 2px solid #d9d9d9;
+      height: 2.3rem;
+    }
+  }
+}
+@media (max-width: 705px) {
+  .form {
+    overflow: auto;
+    margin: 0px 15px 0px 15px;
+    height: 73vh;
+    display: grid;
+    grid-template-rows: 1fr 0.5fr;
+    gap: 10px;
+    &-user {
+      display: grid;
+      grid-template-columns: none;
+      grid-template-rows: 0.7fr 2fr;
+      background-color: white;
+      height: 100%;
+      &_img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &-imagen {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-top: 5px;
+          height: 40vh;
+          width: 35.5vh;
+          padding-top: 30px;
+          padding-bottom: 10px;
+          gap: 20px;
+          background-color: rgb(60, 63, 65);
+          img {
+            height: 25vh;
+          }
+        }
+      }
+      &_data {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: 1fr 1fr 1fr;
+
+        .row {
+          margin: 10px 10px 20px 10px;
+          display: grid;
+          align-items: center;
+          height: 40vh;
+          grid-template-rows: repeat(3, 1fr);
+        }
+      }
+    }
+    &-access {
+      display: grid;
+      grid-template-rows: 1.5fr 1fr;
+      background-color: white;
+      height: 70%;
+      .vertical {
+        display: grid;
+        margin: 10px 10px 20px 10px;
+        align-items: center;
+        gap: 20px;
+        grid-template-columns: none;
+        grid-template-rows: repeat(4, 1fr);
+      }
+      &_button {
+        display: flex;
+        margin-right: 10px;
+        justify-content: end;
+      }
+    }
+    input {
+      border: 2px solid #d9d9d9;
+      height: 2.3rem;
+    }
+  }
+}

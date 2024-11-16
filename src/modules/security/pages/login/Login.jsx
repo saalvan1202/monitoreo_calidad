@@ -1,15 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.scss";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { axiosPostLogin } from "../../../../api/api";
+import { authStore } from "../../../../store/Auth/AuthStote";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
-  function onFinish(value) {
-    console.log(value);
+  const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "¡Bienvenido!",
+    });
+  };
+  const errors = () => {
+    messageApi.open({
+      type: "error",
+      content:
+        "El usuario o la contraseña ingresados son incorrectos. Por favor, inténtelo de nuevo.",
+    });
+  };
+  const navigate = useNavigate();
+  const [token, setToken] = useState();
+  const login = authStore((state) => state.login);
+  async function onFinish(value) {
+    try {
+      const url = "http://localhost:8080/auth/login";
+      const response = await axios.post(url, value);
+      success();
+      setToken(response.data.token);
+      login(response.data.token);
+      navigate("/zones");
+    } catch (error) {
+      errors();
+    }
   }
   return (
     <div className="content">
+      {contextHolder}
       <section className="login">
         <section className="login-header">
           <section className="escudo">
@@ -71,7 +103,10 @@ const Login = () => {
                       },
                     ]}
                   >
-                    <Input placeholder="Contraseña" prefix={<LockOutlined />} />
+                    <Input.Password
+                      placeholder="Contraseña"
+                      prefix={<LockOutlined />}
+                    />
                   </Form.Item>
                 </section>
                 <section className="form-recuperar">

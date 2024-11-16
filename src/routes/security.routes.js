@@ -10,6 +10,10 @@ const routesImport = {
       "../modules/security/pages/actualizar-contraseña/ActualizarContraseña"
     )
   ),
+  crearUsuario: lazy(() =>
+    import("../modules/security/pages/crear-usurio/CrearUsuario")
+  ),
+  profile: lazy(() => import("../modules/security/pages/profile/Profile")),
 };
 
 export const publicRoutes = [
@@ -30,4 +34,15 @@ export const publicRoutes = [
   },
 ];
 
-export const privateRoutes = [];
+export const privateRoutes = [
+  {
+    path: "/create-user",
+    element: routesImport.crearUsuario,
+    title: "Crear Usuario",
+  },
+  {
+    path: "/profile",
+    element: routesImport.profile,
+    title: "Perfil",
+  },
+];
