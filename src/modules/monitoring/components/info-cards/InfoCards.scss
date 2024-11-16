@@ -1,0 +1,25 @@
+.info-card {
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  &__description {
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    &-data {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      align-items: center;
+
+      .rombo {
+        width: 35px;
+        height: 35px;
+        transform: rotate(45deg);
+        position: relative;
+        margin: 50px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    }
+  }
+}

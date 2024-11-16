@@ -31,7 +31,7 @@ const searchResult = (query) =>
       };
     });
 
-const AutoCompleteAcc = () => {
+const AutoCompleteCite = () => {
   const [options, setOptions] = useState([]);
   const handleSearch = (value) => {
     setOptions(value ? searchResult(value) : []);
@@ -50,4 +50,4 @@ const AutoCompleteAcc = () => {
     />
   );
 };
-export default AutoCompleteAcc;
+export default AutoCompleteCite;

@@ -5,7 +5,7 @@ import TotalProvider from '../styles-providers/TotalProvider';
 
 const defaultStyle = {};
 
-const ButtonAcc = ({
+const ButtonCite = ({
   children,
   className = '',
   type = 'default',
@@ -43,9 +43,9 @@ const ButtonAcc = ({
   );
 };
 
-export default ButtonAcc;
+export default ButtonCite;
 
-ButtonAcc.propTypes = {
+ButtonCite.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   type: PropTypes.string,
