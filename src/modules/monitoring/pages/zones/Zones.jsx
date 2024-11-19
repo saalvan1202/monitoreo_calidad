@@ -57,7 +57,6 @@ const Zones = () => {
         if (!zones.length) { actionGetZones() }
     }, [zones])
 
-    console.log(zones)
 
     return (
         <div className="zones p-3 gap-3 overflow-x-scroll">

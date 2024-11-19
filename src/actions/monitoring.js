@@ -5,12 +5,12 @@ import { ZONES_API } from '../api/monitoringAPI';
 export const actionGetZones = async () => {
   const getZones = useMonitoring.getState().getZones;
 
-  axiosInstance
-    .get(ZONES_API)
-    .then((response) => getZones(response.data))
-    .catch((error) => {
-      throw error;
-    });
+  try {
+    const response = await axiosInstance.get(ZONES_API);
+    getZones(response.data);
+  } catch (error) {
+    console.log('Error', error);
+  }
 };
 
 export const actionPostZone = async (values, setConfirmLoading) => {
