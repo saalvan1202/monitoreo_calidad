@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   idZone: 0,
   idArea: 0,
   idTanque: 0,
-  zones: [],
+  zones: null,
+  areas: null,
 };
 
 export const useMonitoring = create(
@@ -13,11 +14,14 @@ export const useMonitoring = create(
     (set) => ({
       idZone: INITIAL_STATE.idZone,
       idArea: INITIAL_STATE.idArea,
+
       zones: INITIAL_STATE.zones,
+      areas: INITIAL_STATE.areas,
 
       setIdZone: (idZone) => set({ idZone }),
       setIdArea: (idArea) => set({ idArea }),
-      getZones: (zones) => set({ zones }),
+      setZones: (zones) => set({ zones }),
+      setAreas: (areas) => set({ areas }),
 
       reset: () => set(INITIAL_STATE),
     }),

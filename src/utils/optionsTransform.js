@@ -1,8 +1,10 @@
-export const optionsTransform = (data) => {
+export const optionsTransform = (data, idKey = 'id') => {
+  if (!data) return [];
+
   const options = data.map((_data) => {
     return {
-      value: _data.id,
-      label: _data.nombre,
+      value: _data[idKey],
+      label: _data.name,
     };
   });
 

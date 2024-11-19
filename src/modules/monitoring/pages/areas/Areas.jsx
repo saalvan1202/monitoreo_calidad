@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input } from 'antd';
 import InfoCards from '../../components/info-cards/InfoCards.jsx';
@@ -9,16 +9,16 @@ import FormArea from './forms/FormArea.jsx';
 import { useMonitoring } from '../../../../store/monitoring/useMonitoring.js';
 import { GRAY_BUTTON } from '../../../../colors/buttons.js'
 import { AQUA_CARD } from '../../../../colors/cards.js';
-import { areas } from '../../../../@fake-db/areas.js';
-import { zonas } from '../../../../@fake-db/zonas.js';
 import { removeSuffix } from '../../../../utils/sufix.js';
+import { actionGetAreasByIdZone, actionGetZones, actionPostArea } from '../../../../actions/monitoring.js';
 import { optionsTransform } from '../../../../utils/optionsTransform.js';
 import './Areas.scss'
 
 const { Search } = Input;
 
 const Areas = () => {
-    const { idZone, setIdZone, setIdArea } = useMonitoring()
+
+    const { idZone, setIdZone, setIdArea, zones, areas } = useMonitoring()
 
     const navigate = useNavigate()
 
@@ -28,13 +28,20 @@ const Areas = () => {
 
     const [openRegister, setOpenRegister] = useState(false)
 
+    const [confirmLoadingRegister, setConfirmLoadingRegister] = useState(false)
+
     const showModalRegister = () => {
         setOpenRegister(true);
     };
 
-    const handleSubmitRegister = (values) => {
+    const handleSubmitRegister = async (values) => {
         const _values = removeSuffix(values, '_area')
-        console.log('success', _values)
+
+        await actionPostArea(_values, setConfirmLoadingRegister)
+
+        formRefRegister.current.resetFields()
+        setOpenRegister(false)
+        actionGetAreasByIdZone(idZone)
     }
 
     const handleSubmitEdit = (values, id) => {
@@ -48,13 +55,22 @@ const Areas = () => {
         navigate('/water-tanks')
     }
 
-    const optionsZones = optionsTransform(zonas);
+    const handleChangeSelect = (value) => {
+        setIdZone(value)
+        actionGetAreasByIdZone(value)
+    }
+
+    const optionsZones = optionsTransform(zones, 'zones_id');
+
+    useEffect(() => {
+        if (!zones) { actionGetZones() }
+    }, [zones])
 
     return (
         <div className="areas p-3 gap-3 overflow-x-scroll">
             <section className='filtros bg-fondo-secciones flex justify-between items-center p-4'>
                 <div className='filtros__select justify-start w-[20%] min-w-[200px]'>
-                    <SelectCite options={optionsZones} defaultValue={idZone} setData={setIdZone} />
+                    <SelectCite options={optionsZones} defaultValue={idZone} handleChange={handleChangeSelect} />
                 </div>
                 <div className='filtros__search w-[20%] min-w-[200px]'>
                     <Search
@@ -70,15 +86,16 @@ const Areas = () => {
                 </section>
                 <section>
                     <div className='cartas__caja-cartas flex justify-center items-center p-14 px-24'>
-                        <div className='cartas__caja-cartas__info-cards w-full gap-20'>
-                            {areas
-                                .filter((area) => area.id_zone === idZone)
-                                .map((area) => (
-                                    <InfoCards key={area.id} id={area.id} nombre={area.nombre} descripcion={area.descripcion} type_card={'area'} color_card={AQUA_CARD} handleClickCard={handleClickCard} formRef={formReftEdit}>
-                                        <FormArea formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, area.id)} id_zone={idZone} nombre={area.nombre} descripcion={area.descripcion} />
-                                    </InfoCards>
-                                ))}
-                        </div>
+                        {areas ? (
+                            <div className='cartas__caja-cartas__info-cards w-full gap-20'>
+                                {areas
+                                    .map((area) => (
+                                        <InfoCards key={area.areas_id} id={area.areas_id} nombre={area.name} descripcion={area.description} type_card={'area'} color_card={AQUA_CARD} handleClickCard={handleClickCard} formRef={formReftEdit}>
+                                            <FormArea formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, area.areas_id)} id_zone={idZone} nombre={area.name} descripcion={area.description} />
+                                        </InfoCards>
+                                    ))}
+                            </div>
+                        ) : (<p>Cargando...</p>)}
                     </div>
                 </section>
             </section>
@@ -94,7 +111,7 @@ const Areas = () => {
                 </ButtonCite>
             </section>
 
-            <FormModal title="Registrar area" open={openRegister} setOpen={setOpenRegister} formRef={formRefRegister}>
+            <FormModal title="Registrar area" open={openRegister} setOpen={setOpenRegister} formRef={formRefRegister} confirmLoading={confirmLoadingRegister} >
                 <FormArea formRef={formRefRegister} handleSubmit={handleSubmitRegister} id_zone={idZone} />
             </FormModal>
         </div >

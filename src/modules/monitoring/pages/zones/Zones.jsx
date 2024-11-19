@@ -54,7 +54,7 @@ const Zones = () => {
     }
 
     useEffect(() => {
-        if (!zones.length) { actionGetZones() }
+        if (!zones) { actionGetZones() }
     }, [zones])
 
 
@@ -75,13 +75,15 @@ const Zones = () => {
                 </section>
                 <section>
                     <div className='cartas__caja-cartas flex justify-center items-center p-14 px-24'>
-                        <div className='cartas__caja-cartas__info-cards w-full gap-20'>
-                            {zones.map((zona) => (
-                                <InfoCards key={zona.zones_id} id={zona.zones_id} nombre={zona.name} descripcion={zona.description} type_card={'zona'} color_card={GREEN_CARD} handleClickCard={handleClickCard} formRef={formReftEdit}>
-                                    <FormZone formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, zona.zones_id)} nombre={zona.name} descripcion={zona.description} />
-                                </InfoCards>
-                            ))}
-                        </div>
+                        {zones ? (
+                            <div className='cartas__caja-cartas__info-cards w-full gap-20'>
+                                {zones.map((zona) => (
+                                    <InfoCards key={zona.zones_id} id={zona.zones_id} nombre={zona.name} descripcion={zona.description} type_card={'zona'} color_card={GREEN_CARD} handleClickCard={handleClickCard} formRef={formReftEdit}>
+                                        <FormZone formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, zona.zones_id)} nombre={zona.name} descripcion={zona.description} />
+                                    </InfoCards>
+                                ))}
+                            </div>
+                        ) : (<p>Cargando...</p>)}
                     </div>
                 </section>
             </section>

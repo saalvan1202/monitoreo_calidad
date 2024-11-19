@@ -1,11 +1,6 @@
 import { Select } from 'antd';
 
-const SelectCite = ({ options = [], defaultValue = "", className = "", setData = () => { } }) => {
-
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-        setData(value)
-    };
+const SelectCite = ({ options = [], defaultValue = "", className = "", handleChange = () => { } }) => {
 
     return (
         <Select
