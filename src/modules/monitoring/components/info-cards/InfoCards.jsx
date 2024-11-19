@@ -35,7 +35,7 @@ const InfoCards = ({ id = null, nombre = "", descripcion = "", type_card = "", c
 
     return (
         <div style={{ backgroundColor: color_card.backgroundColor, ...(isHovered && { backgroundColor: color_card.hoverColor }) }} className="info-card h-64 rounded-lg">
-            <div className="info-card__description bg-white rounded-[6px] flex flex-col justify-between">
+            <div className="info-card__description bg-white  rounded-[6px] flex flex-col justify-center">
                 <div className="info-card__description-data px-4">
                     <div className="flex h-6 relative justify-center items-center">
                         <button style={{ backgroundColor: color_card.backgroundColor, borderColor: color_card.borderColor, ...(isHovered && { backgroundColor: color_card.hoverColor }) }} className="rombo absolute bottom-3 border-2" onMouseEnter={handleMouseEnter}

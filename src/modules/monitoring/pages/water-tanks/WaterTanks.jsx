@@ -5,7 +5,7 @@ import FormModal from '../../../../components/modals/FormModal.jsx';
 import ButtonCite from '../../../../components/cite-ui/ButtonCite.jsx'
 import SelectCite from '../../../../components/cite-ui/SelectCite.jsx';
 import FormWaterTanks from './forms/FormWaterTanks.jsx';
-import { useMonitoring } from '../../../../store/useMonitoring.js';
+import { useMonitoring } from '../../../../store/monitoring/useMonitoring.js';
 import { GRAY_BUTTON } from '../../../../colors/buttons.js'
 import { YELLOW_CARD } from '../../../../colors/cards.js';
 import { tanques } from '../../../../@fake-db/tanques.js';

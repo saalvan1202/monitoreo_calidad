@@ -10,8 +10,8 @@ const FormZone = ({ formRef, handleSubmit = () => { }, nombre = "", descripcion 
         name="basic"
         layout='vertical'
         initialValues={{
-            nombre_zona: nombre,
-            descripcion_zona: descripcion,
+            name_zona: nombre,
+            description_zona: descripcion,
         }}
         onFinish={handleSubmit}
         onFinishFailed={onFinishFailed}
@@ -19,7 +19,7 @@ const FormZone = ({ formRef, handleSubmit = () => { }, nombre = "", descripcion 
     >
         <Form.Item
             label="Nombre"
-            name="nombre_zona"
+            name="name_zona"
             rules={[
                 {
                     required: true,
@@ -32,7 +32,7 @@ const FormZone = ({ formRef, handleSubmit = () => { }, nombre = "", descripcion 
 
         <Form.Item
             label="Descripcion"
-            name="descripcion_zona"
+            name="description_zona"
             rules={[
                 {
                     required: true,
