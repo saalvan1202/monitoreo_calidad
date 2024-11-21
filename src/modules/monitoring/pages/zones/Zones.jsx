@@ -18,13 +18,9 @@ import "./Zones.scss";
 const { Search } = Input;
 
 const Zones = () => {
-  const { setIdZone } = useMonitoring();
-
   const { setIdZone, zones } = useMonitoring();
 
   const formRefRegister = useRef(null);
-
-  const formReftEdit = useRef(null);
 
   const formReftEdit = useRef(null);
 
