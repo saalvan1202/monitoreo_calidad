@@ -25,9 +25,9 @@ const PrivateRoutes = () => {
   }, []);
 
   // Si user es nulo, redirige al login
-  if (user == null) {
-    return <Spin />;
-  }
+  // if (user == null) {
+  //   return <Spin />;
+  // }
 
   return (
     <PrincipalLayout>

@@ -10,9 +10,10 @@ import { useMonitoring } from '../../../../store/monitoring/useMonitoring.js';
 import { GRAY_BUTTON } from '../../../../colors/buttons.js'
 import { AQUA_CARD } from '../../../../colors/cards.js';
 import { removeSuffix } from '../../../../utils/sufix.js';
-import { actionGetAreasByIdZone, actionGetZones, actionPostArea } from '../../../../actions/monitoring.js';
+import { actionGetAreasByIdZone, actionGetTanksByIdArea, actionGetZones, actionPostArea } from '../../../../actions/monitoring.js';
 import { optionsTransform } from '../../../../utils/optionsTransform.js';
 import './Areas.scss'
+import GeneralLoader from '../../../../components/spin-loaders/general-loader';
 
 const { Search } = Input;
 
@@ -52,6 +53,8 @@ const Areas = () => {
 
     const handleClickCard = (id) => {
         setIdArea(id)
+        actionGetTanksByIdArea(id)
+
         navigate('/water-tanks')
     }
 
@@ -66,11 +69,15 @@ const Areas = () => {
         if (!zones) { actionGetZones() }
     }, [zones])
 
+    useEffect(() => {
+        if (!areas && idZone == 0) { actionGetAreasByIdZone(13) }
+    }, [idZone, areas])
+
     return (
         <div className="areas p-3 gap-3 overflow-x-scroll">
             <section className='filtros bg-fondo-secciones flex justify-between items-center p-4'>
                 <div className='filtros__select justify-start w-[20%] min-w-[200px]'>
-                    <SelectCite options={optionsZones} defaultValue={idZone} handleChange={handleChangeSelect} />
+                    <SelectCite options={optionsZones} defaultValue={!areas && idZone == 0 ? 13 : idZone} handleChange={handleChangeSelect} />
                 </div>
                 <div className='filtros__search w-[20%] min-w-[200px]'>
                     <Search
@@ -95,7 +102,7 @@ const Areas = () => {
                                         </InfoCards>
                                     ))}
                             </div>
-                        ) : (<p>Cargando...</p>)}
+                        ) : (<div className='m-10'><GeneralLoader /></div>)}
                     </div>
                 </section>
             </section>

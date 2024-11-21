@@ -1,5 +1,4 @@
 import { Form, Input, Select } from 'antd';
-import { zonas } from '../../../../../@fake-db/zonas.js';
 import { optionsTransform } from '../../../../../utils/optionsTransform.js';
 import { useMonitoring } from '../../../../../store/monitoring/useMonitoring.js';
 

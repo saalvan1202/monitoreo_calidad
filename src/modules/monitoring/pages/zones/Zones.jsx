@@ -5,8 +5,9 @@ import InfoCards from '../../components/info-cards/InfoCards.jsx';
 import FormModal from '../../../../components/modals/FormModal.jsx';
 import ButtonCite from '../../../../components/cite-ui/ButtonCite.jsx'
 import FormZone from './forms/FormZone.jsx';
+import GeneralLoader from '../../../../components/spin-loaders/general-loader/GeneralLoader.jsx';
 import { useMonitoring } from '../../../../store/monitoring/useMonitoring.js';
-import { actionGetZones, actionPostZone } from '../../../../actions/monitoring.js';
+import { actionGetAreasByIdZone, actionGetZones, actionPostZone } from '../../../../actions/monitoring.js';
 import { GRAY_BUTTON } from '../../../../colors/buttons.js'
 import { GREEN_CARD } from '../../../../colors/cards.js';
 import { removeSuffix } from '../../../../utils/sufix.js';
@@ -16,7 +17,7 @@ const { Search } = Input;
 
 const Zones = () => {
 
-    const { setIdZone, zones } = useMonitoring()
+    const { setIdZone, zones, setAreas } = useMonitoring()
 
     const navigate = useNavigate()
 
@@ -50,13 +51,16 @@ const Zones = () => {
 
     const handleClickCard = (id) => {
         setIdZone(id)
+        actionGetAreasByIdZone(id)
+
         navigate('/areas')
     }
 
     useEffect(() => {
         if (!zones) { actionGetZones() }
-    }, [zones])
 
+        setAreas(null)
+    }, [zones, setAreas])
 
     return (
         <div className="zones p-3 gap-3 overflow-x-scroll">
@@ -83,7 +87,7 @@ const Zones = () => {
                                     </InfoCards>
                                 ))}
                             </div>
-                        ) : (<p>Cargando...</p>)}
+                        ) : (<div className='m-10'><GeneralLoader /></div>)}
                     </div>
                 </section>
             </section>

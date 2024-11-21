@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import {
   privateRoutes as monitoringPrivate,
@@ -9,7 +9,7 @@ import {
   privateRoutes as securityPrivate,
   publicRoutes as securityPublic,
 } from "./routes/security.routes";
-import SpinLoader from "./components/spin-loader";
+import SpinLoader from "./components/spin-loaders/general-loader";
 
 function App() {
   return (

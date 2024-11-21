@@ -8,17 +8,15 @@ import FormWaterTanks from './forms/FormWaterTanks.jsx';
 import { useMonitoring } from '../../../../store/monitoring/useMonitoring.js';
 import { GRAY_BUTTON } from '../../../../colors/buttons.js'
 import { YELLOW_CARD } from '../../../../colors/cards.js';
-import { tanques } from '../../../../@fake-db/tanques.js';
-import { areas } from '../../../../@fake-db/areas.js';
-import { zonas } from '../../../../@fake-db/zonas.js';
 import { removeSuffix } from '../../../../utils/sufix.js';
 import { optionsTransform } from '../../../../utils/optionsTransform.js';
 import './WaterTanks.scss'
+import GeneralLoader from '../../../../components/spin-loaders/general-loader/GeneralLoader.jsx';
 
 const { Search } = Input;
 
 const WaterTanks = () => {
-    const { idZone, setIdZone, idArea, setIdArea } = useMonitoring()
+    const { idZone, setIdZone, idArea, setIdArea, zones, areas, tanks } = useMonitoring()
 
     const formRefRegister = useRef(null)
     const formReftEdit = useRef(null)
@@ -40,9 +38,9 @@ const WaterTanks = () => {
         console.log('success', newValues)
     }
 
-    const optionsZones = optionsTransform(zonas);
+    const optionsZones = optionsTransform(zones, 'zones_id');
 
-    const optionsAreas = optionsTransform(areas);
+    const optionsAreas = optionsTransform(areas, 'areas_id');
 
     return (
         <div className="water-tanks p-3 gap-3 overflow-x-scroll">
@@ -65,15 +63,16 @@ const WaterTanks = () => {
                 </section>
                 <section>
                     <div className='cartas__caja-cartas flex justify-center items-center p-14 px-24'>
-                        <div className='cartas__caja-cartas__info-cards w-full gap-20'>
-                            {tanques
-                                .filter((tanque) => tanque.id_area === idArea)
-                                .map((tanque) => (
-                                    <InfoCards key={tanque.id} id={tanque.id} nombre={tanque.nombre} descripcion={tanque.descripcion} type_card={'tanque'} color_card={YELLOW_CARD} formRef={formReftEdit}>
-                                        <FormWaterTanks formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, tanque.id)} id_area={idArea} nombre={tanque.nombre} descripcion={tanque.descripcion} />
-                                    </InfoCards>
-                                ))}
-                        </div>
+                        {tanks ? (
+                            <div className='cartas__caja-cartas__info-cards w-full gap-20'>
+                                {tanks
+                                    .map((tank) => (
+                                        <InfoCards key={tank.id} id={tank.id} nombre={tank.name} descripcion={tank.description} type_card={'tank'} color_card={YELLOW_CARD} formRef={formReftEdit}>
+                                            <FormWaterTanks formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, tank.id)} id_area={idArea} nombre={tank.name} descripcion={tank.description} />
+                                        </InfoCards>
+                                    ))}
+                            </div>
+                        ) : (<div className='m-10'><GeneralLoader /></div>)}
                     </div>
                 </section>
             </section>

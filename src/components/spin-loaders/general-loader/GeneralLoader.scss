@@ -1,14 +1,14 @@
-.loader {
+.general-loader {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   display: inline-block;
-  border-top: 4px solid #053275;
+  border-top: 4px solid #247ebe;
   border-right: 4px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
-.loader::after {
+.general-loader::after {
   content: '';
   box-sizing: border-box;
   position: absolute;
@@ -17,7 +17,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border-left: 4px solid #9dc817;
+  border-left: 4px solid #3a3a39;
   border-bottom: 4px solid transparent;
   animation: rotation 0.5s linear infinite reverse;
 }
