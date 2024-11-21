@@ -5,35 +5,45 @@ import InfoCards from "../../components/info-cards/InfoCards.jsx";
 import FormModal from "../../../../components/modals/FormModal.jsx";
 import ButtonCite from "../../../../components/cite-ui/ButtonCite.jsx";
 import FormZone from "./forms/FormZone.jsx";
-import { useMonitoring } from "../../../../store/useMonitoring.js";
+import { useMonitoring } from "../../../../store/monitoring/useMonitoring.js";
+import {
+  actionGetZones,
+  actionPostZone,
+} from "../../../../actions/monitoring.js";
 import { GRAY_BUTTON } from "../../../../colors/buttons.js";
 import { GREEN_CARD } from "../../../../colors/cards.js";
-import { zonas } from "../../../../@fake-db/zonas.js";
 import { removeSuffix } from "../../../../utils/sufix.js";
 import "./Zones.scss";
-import axios from "axios";
-import { authStore } from "../../../../store/Auth/AuthStote.jsx";
 
 const { Search } = Input;
 
 const Zones = () => {
   const { setIdZone } = useMonitoring();
 
-  const navigate = useNavigate();
+  const { setIdZone, zones } = useMonitoring();
 
   const formRefRegister = useRef(null);
 
   const formReftEdit = useRef(null);
 
+  const formReftEdit = useRef(null);
+
   const [openRegister, setOpenRegister] = useState(false);
+
+  const [confirmLoadingRegister, setConfirmLoadingRegister] = useState(false);
 
   const showModalRegister = () => {
     setOpenRegister(true);
   };
 
-  const handleSubmitRegister = (values) => {
+  const handleSubmitRegister = async (values) => {
     const _values = removeSuffix(values, "_zona");
-    console.log("success", _values);
+
+    await actionPostZone(_values, setConfirmLoadingRegister);
+
+    formRefRegister.current.resetFields();
+    setOpenRegister(false);
+    actionGetZones();
   };
 
   const handleSubmitEdit = (values, id) => {
@@ -46,6 +56,14 @@ const Zones = () => {
     setIdZone(id);
     navigate("/areas");
   };
+
+  useEffect(() => {
+    if (!zones.length) {
+      actionGetZones();
+    }
+  }, [zones]);
+
+  console.log(zones);
 
   return (
     <div className="zones p-3 gap-3 overflow-x-scroll">
@@ -61,12 +79,12 @@ const Zones = () => {
         <section>
           <div className="cartas__caja-cartas flex justify-center items-center p-14 px-24">
             <div className="cartas__caja-cartas__info-cards w-full gap-20">
-              {zonas.map((zona) => (
+              {zones.map((zona) => (
                 <InfoCards
-                  key={zona.id}
-                  id={zona.id}
-                  nombre={zona.nombre}
-                  descripcion={zona.descripcion}
+                  key={zona.zones_id}
+                  id={zona.zones_id}
+                  nombre={zona.name}
+                  descripcion={zona.description}
                   type_card={"zona"}
                   color_card={GREEN_CARD}
                   handleClickCard={handleClickCard}
@@ -74,9 +92,11 @@ const Zones = () => {
                 >
                   <FormZone
                     formRef={formReftEdit}
-                    handleSubmit={(value) => handleSubmitEdit(value, zona.id)}
-                    nombre={zona.nombre}
-                    descripcion={zona.descripcion}
+                    handleSubmit={(value) =>
+                      handleSubmitEdit(value, zona.zones_id)
+                    }
+                    nombre={zona.name}
+                    descripcion={zona.description}
                   />
                 </InfoCards>
               ))}
@@ -101,6 +121,7 @@ const Zones = () => {
         open={openRegister}
         setOpen={setOpenRegister}
         formRef={formRefRegister}
+        confirmLoading={confirmLoadingRegister}
       >
         <FormZone
           formRef={formRefRegister}

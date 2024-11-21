@@ -1,22 +1,25 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-const initialState = {
+const INITIAL_STATE = {
   idZone: 0,
   idArea: 0,
   idTanque: 0,
+  zones: [],
 };
 
 export const useMonitoring = create(
   persist(
     (set) => ({
-      idZone: initialState.idZone,
-      idArea: initialState.idArea,
+      idZone: INITIAL_STATE.idZone,
+      idArea: INITIAL_STATE.idArea,
+      zones: INITIAL_STATE.zones,
 
       setIdZone: (idZone) => set({ idZone }),
       setIdArea: (idArea) => set({ idArea }),
+      getZones: (zones) => set({ zones }),
 
-      reset: () => set(initialState),
+      reset: () => set(INITIAL_STATE),
     }),
     {
       name: 'monitoring-storage',
