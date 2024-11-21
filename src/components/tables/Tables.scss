@@ -1,0 +1,53 @@
+table {
+  tr:nth-child(odd) {
+    background-color: #f5f5f5; /* Color claro para las filas impares */
+  }
+
+  tr:nth-child(even) {
+    background-color: #a2a3a3; /* Color blanco para las filas pares */
+    &:hover {
+      background-color: #a2a3a3;
+    }
+  }
+}
+:where(.css-dev-only-do-not-override-apn68).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:first-child {
+  border-start-start-radius: 0px;
+}
+:where(.css-dev-only-do-not-override-apn68).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:last-child {
+  border-start-end-radius: 0px;
+}
+.ant-table-column-has-sorters {
+  background-color: #ac2626 !important;
+  border-radius: 0;
+}
+:where(.css-dev-only-do-not-override-apn68).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th,
+:where(.css-dev-only-do-not-override-apn68).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > td {
+  color: white;
+}
+:where(.css-dev-only-do-not-override-apn68).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th,
+:where(.css-dev-only-do-not-override-apn68).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > td {
+  background-color: #ac2626 !important;
+  border-radius: 0;
+}

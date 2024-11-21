@@ -14,6 +14,10 @@ const routesImport = {
     import("../modules/security/pages/crear-usurio/CrearUsuario")
   ),
   profile: lazy(() => import("../modules/security/pages/profile/Profile")),
+  listaUsers: lazy(() =>
+    import("../modules/security/pages/list-users/ListaUsurio")
+  ),
+  backups: lazy(() => import("../modules/security/pages/backups/Backup")),
 };
 
 export const publicRoutes = [
@@ -44,5 +48,15 @@ export const privateRoutes = [
     path: "/profile",
     element: routesImport.profile,
     title: "Perfil",
+  },
+  {
+    path: "list-users",
+    element: routesImport.listaUsers,
+    title: "Lista de Usuarios",
+  },
+  {
+    path: "backup",
+    element: routesImport.backups,
+    title: "BackUp",
   },
 ];

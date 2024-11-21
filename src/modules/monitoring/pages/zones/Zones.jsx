@@ -17,97 +17,106 @@ const { Search } = Input;
 
 const Zones = () => {
 
-    const { setIdZone, zones, setAreas } = useMonitoring()
+  const { setIdZone, zones, setAreas } = useMonitoring()
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const formRefRegister = useRef(null)
+  const formRefRegister = useRef(null)
 
-    const formReftEdit = useRef(null)
+  const formReftEdit = useRef(null)
 
-    const [openRegister, setOpenRegister] = useState(false)
+  const [openRegister, setOpenRegister] = useState(false)
 
-    const [confirmLoadingRegister, setConfirmLoadingRegister] = useState(false)
+  const [confirmLoadingRegister, setConfirmLoadingRegister] = useState(false)
 
-    const showModalRegister = () => {
-        setOpenRegister(true);
-    };
+  const showModalRegister = () => {
+    setOpenRegister(true);
+  };
 
-    const handleSubmitRegister = async (values) => {
-        const _values = removeSuffix(values, '_zona')
+  const handleSubmitRegister = async (values) => {
+    const _values = removeSuffix(values, "_zona");
 
-        await actionPostZone(_values, setConfirmLoadingRegister)
+    await actionPostZone(_values, setConfirmLoadingRegister);
 
-        formRefRegister.current.resetFields()
-        setOpenRegister(false)
-        actionGetZones()
-    }
+    formRefRegister.current.resetFields();
+    setOpenRegister(false);
+    actionGetZones();
+  };
 
-    const handleSubmitEdit = (values, id) => {
-        const _values = removeSuffix(values, '_zona')
-        const newValues = { id, ..._values }
-        console.log('success', newValues)
-    }
+  const handleSubmitEdit = (values, id) => {
+    const _values = removeSuffix(values, "_zona");
+    const newValues = { id, ..._values };
+    console.log("success", newValues);
+  };
 
-    const handleClickCard = (id) => {
-        setIdZone(id)
-        actionGetAreasByIdZone(id)
+  const handleClickCard = (id) => {
+    setIdZone(id)
+    actionGetAreasByIdZone(id)
 
-        navigate('/areas')
-    }
+    navigate('/areas')
+  }
 
-    useEffect(() => {
-        if (!zones) { actionGetZones() }
+  useEffect(() => {
+    if (!zones) { actionGetZones() }
 
-        setAreas(null)
-    }, [zones, setAreas])
+    setAreas(null)
+  }, [zones, setAreas])
 
-    return (
-        <div className="zones p-3 gap-3 overflow-x-scroll">
-            <section className='filtros bg-fondo-secciones flex justify-end items-center p-4'>
-                <div className='filtros__search w-[20%] min-w-[200px]'>
-                    <Search
-                        placeholder="Search"
-                        allowClear
-                        size='large'
-                    />
-                </div>
-            </section>
-            <section className='cartas bg-fondo-secciones '>
-                <section className='flex justify-start p-4 border-b border-fondo-footer'>
-                    <p className='font-inter text-lg text-texto-gray'>Zonas</p>
-                </section>
-                <section>
-                    <div className='cartas__caja-cartas flex justify-center items-center p-14 px-24'>
-                        {zones ? (
-                            <div className='cartas__caja-cartas__info-cards w-full gap-20'>
-                                {zones.map((zona) => (
-                                    <InfoCards key={zona.zones_id} id={zona.zones_id} nombre={zona.name} descripcion={zona.description} type_card={'zona'} color_card={GREEN_CARD} handleClickCard={handleClickCard} formRef={formReftEdit}>
-                                        <FormZone formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, zona.zones_id)} nombre={zona.name} descripcion={zona.description} />
-                                    </InfoCards>
-                                ))}
-                            </div>
-                        ) : (<div className='m-10'><GeneralLoader /></div>)}
-                    </div>
-                </section>
-            </section>
-            <section className='flex justify-end'>
-                <ButtonCite
-                    size="large"
-                    type="primary"
-                    borderRadius="4px"
-                    propsComponentes={GRAY_BUTTON}
-                    onClick={showModalRegister}
-                >
-                    <p className='font-inter font-light text-xs'>REGISTRAR ZONA</p>
-                </ButtonCite>
-            </section>
+  return (
+    <div className="zones p-3 gap-3 overflow-x-scroll">
+      <section className='filtros bg-fondo-secciones flex justify-end items-center p-4'>
+        <div className='filtros__search w-[20%] min-w-[200px]'>
+          <Search
+            placeholder="Search"
+            allowClear
+            size='large'
+          />
+        </div>
+      </section>
+      <section className='cartas bg-fondo-secciones '>
+        <section className='flex justify-start p-4 border-b border-fondo-footer'>
+          <p className='font-inter text-lg text-texto-gray'>Zonas</p>
+        </section>
+        <section>
+          <div className='cartas__caja-cartas flex justify-center items-center p-14 px-24'>
+            {zones ? (
+              <div className='cartas__caja-cartas__info-cards w-full gap-20'>
+                {zones.map((zona) => (
+                  <InfoCards key={zona.zones_id} id={zona.zones_id} nombre={zona.name} descripcion={zona.description} type_card={'zona'} color_card={GREEN_CARD} handleClickCard={handleClickCard} formRef={formReftEdit}>
+                    <FormZone formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, zona.zones_id)} nombre={zona.name} descripcion={zona.description} />
+                  </InfoCards>
+                ))}
+              </div>
+            ) : (<div className='m-10'><GeneralLoader /></div>)}
+          </div>
+        </section>
+      </section>
+      <section className='flex justify-end'>
+        <ButtonCite
+          size="large"
+          type="primary"
+          borderRadius="4px"
+          propsComponentes={GRAY_BUTTON}
+          onClick={showModalRegister}
+        >
+          <p className='font-inter font-light text-xs'>REGISTRAR ZONA</p>
+        </ButtonCite>
+      </section>
 
-            <FormModal title="Registrar zona" open={openRegister} setOpen={setOpenRegister} formRef={formRefRegister} confirmLoading={confirmLoadingRegister}>
-                <FormZone formRef={formRefRegister} handleSubmit={handleSubmitRegister} />
-            </FormModal>
-        </div >
-    )
-}
+      <FormModal
+        title="Registrar zona"
+        open={openRegister}
+        setOpen={setOpenRegister}
+        formRef={formRefRegister}
+        confirmLoading={confirmLoadingRegister}
+      >
+        <FormZone
+          formRef={formRefRegister}
+          handleSubmit={handleSubmitRegister}
+        />
+      </FormModal>
+    </div>
+  );
+};
 
-export default Zones
+export default Zones;
