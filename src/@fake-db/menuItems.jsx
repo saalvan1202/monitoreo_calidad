@@ -1,33 +1,45 @@
 import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
+  ExperimentOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
 
 export const menuItems = [
   {
-    label: 'Navigation One',
-    key: 'mail',
-    icon: <MailOutlined />,
-  },
-  {
-    label: 'Navigation Two',
-    key: 'app',
-    icon: <AppstoreOutlined />,
-  },
-  {
-    label: 'Navigation Three - Submenu',
-    key: 'SubMenu',
-    icon: <SettingOutlined />,
+    label: 'Seguridad',
+    key: '1',
+    icon: <UserOutlined />,
     children: [
       {
-        label: 'Item 1',
-        key: 'sadasd'
+        label: 'Usuarios',
+        key: '11'
       },
       {
-        label: 'Item 2',
-        key: 'jsadjasd'
+        label: 'Crear usuario',
+        key: '12'
       },
+      {
+        label: 'Backup',
+        key: '13'
+      },
+    ],
+  },
+  {
+    label: 'Monitoreo',
+    key: '2',
+    icon: <ExperimentOutlined />,
+    children: [
+      {
+        label: 'Zonas',
+        key: '21'
+      },
+      {
+        label: 'Areas',
+        key: '22'
+      },
+      {
+        label: 'Tanques',
+        key: '23'
+      }
     ],
   },
 ];
