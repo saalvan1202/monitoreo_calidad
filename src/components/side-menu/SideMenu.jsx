@@ -49,6 +49,10 @@ const SideMenu = () => {
     if (item.key == '24') {
       navigate('/parameters');
     }
+
+    if (item.key == '31') {
+      navigate('/reports');
+    }
   };
 
   return (

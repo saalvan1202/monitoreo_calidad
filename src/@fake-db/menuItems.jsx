@@ -1,5 +1,6 @@
 import {
   ExperimentOutlined,
+  PaperClipOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 
@@ -43,6 +44,18 @@ export const menuItems = [
       {
         label: 'Parametros',
         key: '24'
+      },
+    ],
+  },
+
+  {
+    label: 'Reportes',
+    key: '3',
+    icon: <PaperClipOutlined />,
+    children: [
+      {
+        label: 'Reporte',
+        key: '31'
       },
     ],
   },
