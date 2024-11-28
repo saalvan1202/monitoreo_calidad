@@ -53,7 +53,7 @@ const SimplePieChart = ({ data = [] }) => {
                     value: newData.indicador
                 }));
 
-            chart.title('PARAMETROS DE CALIDAD DE AGUA EN EL TANQUE 3', {
+            chart.title('PARAMETROS DE CALIDAD DE AGUA EN EL TANQUE 1', {
                 position: 'top', // Posición del título (puede ser 'top', 'bottom', 'left', 'right')
                 align: 'center', // Alineación del título ('start', 'center', 'end')
                 style: {
@@ -70,7 +70,7 @@ const SimplePieChart = ({ data = [] }) => {
                 chart.destroy();
             };
         }
-    }, []);
+    }, [newData]);
 
     return <div className='bg-fondo-secciones w-full flex justify-center items-center' ref={chartRef} />;
 };

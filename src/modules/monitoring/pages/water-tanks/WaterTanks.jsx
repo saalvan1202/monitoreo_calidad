@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { Input } from 'antd';
 import InfoCards from '../../components/info-cards/InfoCards.jsx';
 import FormModal from '../../../../components/modals/FormModal.jsx';
@@ -18,6 +19,8 @@ const { Search } = Input;
 const WaterTanks = () => {
     const { idZone, setIdZone, idArea, setIdArea, zones, areas, tanks } = useMonitoring()
 
+    const navigate = useNavigate()
+
     const formRefRegister = useRef(null)
     const formReftEdit = useRef(null)
 
@@ -36,6 +39,11 @@ const WaterTanks = () => {
         const _values = removeSuffix(values, '_tanque')
         const newValues = { id, ..._values }
         console.log('success', newValues)
+    }
+
+    const handleClickCard = () => {
+
+        navigate('/parameters')
     }
 
     const optionsZones = optionsTransform(zones, 'zones_id');
@@ -67,7 +75,7 @@ const WaterTanks = () => {
                             <div className='cartas__caja-cartas__info-cards w-full gap-20'>
                                 {tanks
                                     .map((tank) => (
-                                        <InfoCards key={tank.id} id={tank.id} nombre={tank.name} descripcion={tank.description} type_card={'tank'} color_card={YELLOW_CARD} formRef={formReftEdit}>
+                                        <InfoCards key={tank.id} id={tank.id} nombre={tank.name} descripcion={tank.description} type_card={'tank'} color_card={YELLOW_CARD} formRef={formReftEdit} handleClickCard={handleClickCard}>
                                             <FormWaterTanks formRef={formReftEdit} handleSubmit={(value) => handleSubmitEdit(value, tank.id)} id_area={idArea} nombre={tank.name} descripcion={tank.description} />
                                         </InfoCards>
                                     ))}

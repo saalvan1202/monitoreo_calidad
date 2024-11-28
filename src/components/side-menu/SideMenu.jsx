@@ -45,6 +45,10 @@ const SideMenu = () => {
     if (item.key == '23') {
       navigate('/water-tanks');
     }
+
+    if (item.key == '24') {
+      navigate('/parameters');
+    }
   };
 
   return (
