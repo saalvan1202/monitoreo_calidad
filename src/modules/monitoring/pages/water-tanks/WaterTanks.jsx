@@ -21,19 +21,19 @@ const WaterTanks = () => {
 
     const navigate = useNavigate()
 
-    const formRefRegister = useRef(null)
-    const formReftEdit = useRef(null)
+    const formRefRegister = useRef(null);
+    const formReftEdit = useRef(null);
 
-    const [openRegister, setOpenRegister] = useState(false)
+    const [openRegister, setOpenRegister] = useState(false);
 
     const showModalRegister = () => {
         setOpenRegister(true);
     };
 
     const handleSubmitRegister = (values) => {
-        const _values = removeSuffix(values, '_tanque')
-        console.log('success', _values)
-    }
+        const _values = removeSuffix(values, "_tanque");
+        console.log("success", _values);
+    };
 
     const handleSubmitEdit = (values, id) => {
         const _values = removeSuffix(values, '_tanque')
@@ -48,7 +48,7 @@ const WaterTanks = () => {
 
     const optionsZones = optionsTransform(zones, 'zones_id');
 
-    const optionsAreas = optionsTransform(areas, 'areas_id');
+    const optionsAreas = optionsTransform(areas, "areas_id");
 
     return (
         <div className="water-tanks p-3 gap-3 overflow-x-scroll">
@@ -96,11 +96,20 @@ const WaterTanks = () => {
                 </ButtonCite>
             </section>
 
-            <FormModal title="Registrar area" open={openRegister} setOpen={setOpenRegister} formRef={formRefRegister}>
-                <FormWaterTanks formRef={formRefRegister} handleSubmit={handleSubmitRegister} id_area={idArea} />
+            <FormModal
+                title="Registrar area"
+                open={openRegister}
+                setOpen={setOpenRegister}
+                formRef={formRefRegister}
+            >
+                <FormWaterTanks
+                    formRef={formRefRegister}
+                    handleSubmit={handleSubmitRegister}
+                    id_area={idArea}
+                />
             </FormModal>
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default WaterTanks
+export default WaterTanks;

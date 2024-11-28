@@ -1,0 +1,38 @@
+.reports {
+  display: grid;
+  gap: 10px;
+  height: 80vh;
+  padding: 5px;
+  &-filter {
+    background-color: #d1d1d1;
+  }
+  &-body {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color: #d1d1d1;
+    padding: 5px;
+    gap: 5px;
+    &-action {
+      display: grid;
+      grid-template-rows: 2fr 1fr;
+      background-color: #3c3f41;
+    }
+    &-preview {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #3c3f41;
+    }
+  }
+}
+.filter-report {
+  display: flex;
+  color: white;
+  justify-content: start;
+  align-items: start;
+  margin: 10px;
+  margin-left: 40px;
+  margin-right: 40px;
+  gap: 5px;
+  flex-direction: column;
+}

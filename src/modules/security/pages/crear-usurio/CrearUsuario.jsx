@@ -3,12 +3,18 @@ import "./CrearUsuario.scss";
 import Form from "antd/es/form/Form";
 import { PlusOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
-import { axiosPost, URLREGISTER } from "../../../../api/api";
+import {
+  axiosGet,
+  axiosPost,
+  URLREGISTER,
+  URLROLES,
+} from "../../../../api/api";
 import { Value } from "sass";
 import { USEROBJ } from "./Objects";
 import FormModal from "../../../../components/modals/FormModal";
 import FormCambiarContraseña from "./FormCambiarContraseña";
 import { authStore } from "../../../../store/Auth/AuthStote";
+import { useParams } from "react-router-dom";
 export default function CrearUsuario(props) {
   const { disable, user, buttonText } = props;
   let contentButton = "AGREGAR";
@@ -33,6 +39,14 @@ export default function CrearUsuario(props) {
   const [messageApi, contextHolder] = message.useMessage();
   const token = authStore((state) => state.tokens);
 
+  // ROLES
+  const [roles, setRoles] = useState([
+    {
+      role_id: "",
+      role_name: "",
+    },
+  ]);
+  const [loads, setLoads] = useState();
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`, // Reemplaza 'tu_token_aqui' con tu token real
@@ -88,6 +102,13 @@ export default function CrearUsuario(props) {
     );
     console.log(value);
   }
+  useEffect(() => {
+    function getRoles() {
+      axiosGet(URLROLES, headers, setLoads, setRoles);
+    }
+    getRoles();
+  }, []);
+
   return (
     <>
       <Form onFinish={onFinish}>
@@ -360,16 +381,20 @@ export default function CrearUsuario(props) {
                       }}
                       options={[
                         {
-                          value: "Administrador",
-                          label: "Administrador",
+                          value: 1,
+                          label: "ROLE_ADMIN",
                         },
                         {
-                          value: "Biologo",
-                          label: "Biologo",
+                          value: 2,
+                          label: "ROLE_USER",
                         },
                         {
-                          value: "Practicante",
-                          label: "Practicante",
+                          value: 3,
+                          label: "ROLE_BIOLOGIST",
+                        },
+                        {
+                          value: 4,
+                          label: "ROLE_PRACTICING ",
                         },
                       ]}
                     />
