@@ -3,6 +3,7 @@ import axios from "axios";
 export const URLREGISTER = "http://localhost:8080/auth/register";
 export const URLUSERS = "http://localhost:8080/auth/users";
 export const URLBACKUP = "http://localhost:8080/backups";
+export const URLROLES = "http://localhost:8080/roles";
 export const URLUSER = (id) => {
   return `http://localhost:8080/users/${id}`;
 };

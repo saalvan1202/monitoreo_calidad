@@ -7,7 +7,7 @@ export const authStore = create((set) => ({
   user: null,
   login: async (token) => {
     const tokens = token;
-    const user = jwtDecode(token);
+    const user = jwtDecode(tokens);
     console.log(tokens, user);
     set({ tokens, user });
     localStorage.setItem("token", tokens);
