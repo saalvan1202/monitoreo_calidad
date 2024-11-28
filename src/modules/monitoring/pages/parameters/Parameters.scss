@@ -1,0 +1,19 @@
+.parameters {
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  &__filters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &__graphics {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    &-options {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+  }
+}

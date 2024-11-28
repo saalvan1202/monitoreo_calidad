@@ -39,7 +39,12 @@ export const menuItems = [
       {
         label: 'Tanques',
         key: '23'
-      }
+      },
+      {
+        label: 'Parametros',
+        key: '24'
+      },
     ],
   },
+
 ];
